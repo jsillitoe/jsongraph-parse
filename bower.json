@@ -1,0 +1,25 @@
+{
+  "name": "jsongraph-parse",
+  "homepage": "https://github.com/jsillitoe/jsongraph-parse",
+  "authors": [
+    "jrs1 <jsillitoe@gmail.com>"
+  ],
+  "description": "Parse through a json graph object using path sets to extract values.",
+  "main": "",
+  "moduleType": [
+    "es6"
+  ],
+  "keywords": [
+    "json",
+    "jsonGraph",
+    "parser"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
