@@ -2,6 +2,15 @@
 default:
     - 'dist'
 
+build:
+    - 'clean:build'
+
+test:
+    - 'connect:test'
+    - 'mocha'
+
 dist:
     - 'clean:dist'
+    - 'build'
+    - 'test'
 
