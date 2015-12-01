@@ -19,5 +19,11 @@
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/jsillitoe/jsongraph-parse/issues"
+  },
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-clean": "^0.7.0",
+    "load-grunt-config": "^0.19.1",
+    "load-grunt-tasks": "^3.3.0"
   }
 }
