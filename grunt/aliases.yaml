@@ -4,6 +4,7 @@ default:
 
 build:
     - 'clean:build'
+    - 'babel:build'
 
 test:
     - 'connect:test'
