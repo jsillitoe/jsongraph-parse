@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="../bower_components/mocha/mocha.css">
 </head>
 <body>
+    <h1>JsonGraph Tests</h1>
 
     <div id="mocha"></div>
 
@@ -19,15 +20,13 @@
         var should = chai.should();
     </script>
 
-    <!-- include application files here... -->
+    <!-- include the build file here -->
     <script src="../build/jsongraph-parse.js"></script>
 
-
     <!-- include spec files here... -->
-    <script src="spec/parser.js"></script>
+    <script src="spec/jsongraph.spec.js"></script>
 
     <script>mocha.run()</script>
-
 
 </body>
 </html>

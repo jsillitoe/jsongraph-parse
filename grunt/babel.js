@@ -14,7 +14,7 @@ module.exports = {
             expand: true,
             cwd: 'src',
             src: ['*.js'],
-            dest: 'build',
+            dest: 'build/modules',
             ext: ".js"
         }]
     }

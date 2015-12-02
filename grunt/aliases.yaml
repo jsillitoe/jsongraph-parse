@@ -4,7 +4,10 @@ default:
 
 build:
     - 'clean:build'
-    - 'babel:build'
+    - 'browserify:build'
+
+livetest:
+    - 'connect:test:keepalive'
 
 test:
     - 'connect:test'

@@ -9,7 +9,7 @@ module.exports = {
         options: {
             run: true,
             urls: [
-                'http://localhost:9001/tests/tests.html'
+                'http://localhost:9001/test/tests.html'
             ],
             log: true
         }
