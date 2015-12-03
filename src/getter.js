@@ -11,13 +11,22 @@
 "use strict";
 
 
-var getter = function(pathsets, jsonGraph){
-
+var getter = function(pathset, jsonGraph){
     var json = JSON.parse(JSON.stringify(jsonGraph));
+    var pathLength = pathset.length;
 
+    var walkGraph = function(currentJson, currentDepth){
+        var nextDepth = currentDepth + 1;
+        var nextElement = pathset[currentDepth];
+        var nextJson = currentJson[nextElement];
+        if (nextDepth == pathLength){
+            return nextJson;
+        }else{
+            return walkGraph(nextJson, nextDepth);
+        }
+    };
 
-
-
+    return walkGraph(json, 0);
 };
 
 module.exports = getter;

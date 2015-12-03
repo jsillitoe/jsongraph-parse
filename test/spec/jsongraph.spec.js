@@ -10,6 +10,25 @@ describe('jsonGraph ', function () {
         expect(JsonGraph).to.exist;
     });
 
+    describe('get function', function(){
+
+        describe('passing a normal json object', function (){
+
+            it ('should return a value from a simple object', function(){
+                var json = {'a' : 'value'};
+                var thevalue = JsonGraph.get(['a'], json);
+                expect(thevalue).to.equal('value');
+            });
+
+           it ('should return a value from an object with depth', function(){
+                var json = {'a' : {'b': {'c': 'value'}}};
+                var thevalue = JsonGraph.get(['a','b','c'], json);
+                expect(thevalue).to.equal('value');
+            });
+
+        });
+
+    });
 
     describe('pathset', function(){
 
@@ -24,8 +43,6 @@ describe('jsonGraph ', function () {
                 });
 
             });
-
-
 
             describe('normalization', function(){
 
@@ -78,13 +95,11 @@ describe('jsonGraph ', function () {
                     expect(normalrange).to.deep.equal({"from": 4, "to": 9});
                 });
 
-
             });
 
         });
 
     });
-
 
 });
 
