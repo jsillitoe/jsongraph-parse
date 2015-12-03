@@ -11,7 +11,7 @@
 "use strict";
 
 
-var parse = function(pathsets, jsonGraph){
+var getter = function(pathsets, jsonGraph){
 
     var json = JSON.parse(JSON.stringify(jsonGraph));
 
@@ -20,5 +20,5 @@ var parse = function(pathsets, jsonGraph){
 
 };
 
-module.exports = parse;
+module.exports = getter;
 
