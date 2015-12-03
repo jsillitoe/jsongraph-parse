@@ -10,7 +10,7 @@ module.exports = {
 
         },
         files: {
-            'build/jsongraph-parse.js': ['src/main.js']
+            'build/jsongraph-parse.js': ['src/index.js']
         }
     }
 };
