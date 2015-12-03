@@ -10,8 +10,16 @@
 
 "use strict";
 
+var isRange = require('./isrange');
+
 
 var normalize = function(rangeObj){
+
+    if (!isRange(rangeObj)){
+        // we can't normalize it if it's not a range object.  just return it.
+        return rangeObj;
+    }
+
     var normalized = {};
     normalized.from = rangeObj.hasOwnProperty('from') ? rangeObj.from : 0;
     normalized.to = rangeObj.hasOwnProperty('to') ? rangeObj.to : normalized.from;

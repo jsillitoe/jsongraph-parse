@@ -12,6 +12,23 @@ describe('jsonGraph ', function () {
 
     describe('get function', function(){
 
+
+        describe('passing a json graph object',function(){
+
+
+            it ('should follow $ref objects', function(){
+                console.log("-----------------");
+                var jg = {a: {"$type": 'ref', "value": ['b']}, 'b': { 'c': 'value'}};
+                var thevalue = JsonGraph.get(['a','c'], jg);
+                expect(thevalue).to.equal('value');
+                console.log("=================");
+            });
+
+        });
+
+
+
+
         describe('passing a normal json object', function (){
 
             it ('should return a value from a simple object', function(){
@@ -20,10 +37,16 @@ describe('jsonGraph ', function () {
                 expect(thevalue).to.equal('value');
             });
 
-           it ('should return a value from an object with depth', function(){
+            it ('should return a value from an object with depth', function(){
                 var json = {'a' : {'b': {'c': 'value'}}};
                 var thevalue = JsonGraph.get(['a','b','c'], json);
                 expect(thevalue).to.equal('value');
+            });
+
+            it ('should return a object from an object with depth', function(){
+                var json = {'a' : {'b': {'c': 'value'}}};
+                var theobject = JsonGraph.get(['a','b'], json);
+                expect(theobject).to.deep.equal({'c': 'value'});
             });
 
         });
@@ -62,12 +85,6 @@ describe('jsonGraph ', function () {
                     var range = {"from": 5};
                     var normalrange = JsonGraph.range.normalize(range);
                     expect(normalrange).to.deep.equal({"from": 5, "to": 5});
-                });
-
-                it ('should normalize when missing the "from" and "to" properties', function(){
-                    var range = {};
-                    var normalrange = JsonGraph.range.normalize(range);
-                    expect(normalrange).to.deep.equal({"from": 0, "to": 0});
                 });
 
                 it ('should normalize when "to" property is less than the "from" property', function(){

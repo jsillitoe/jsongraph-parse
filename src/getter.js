@@ -10,23 +10,30 @@
 
 "use strict";
 
+var toArray = require('./range/toarray');
 
 var getter = function(pathset, jsonGraph){
     var json = JSON.parse(JSON.stringify(jsonGraph));
-    var pathLength = pathset.length;
 
-    var walkGraph = function(currentJson, currentDepth){
+    var walkGraph = function(currentJson, currentDepth, path, graph){
         var nextDepth = currentDepth + 1;
-        var nextElement = pathset[currentDepth];
-        var nextJson = currentJson[nextElement];
-        if (nextDepth == pathLength){
+        var nextElement = path[currentDepth];
+        var nextJson;
+
+        if (typeof currentJson=='object' && currentJson.hasOwnProperty('$type') && currentJson['$type']=='ref'){
+            currentJson = walkGraph(graph, 0, currentJson['value'], graph);
+        }
+
+        nextJson = currentJson[nextElement];
+
+        if (nextDepth == path.length){
             return nextJson;
         }else{
-            return walkGraph(nextJson, nextDepth);
+            return walkGraph(nextJson, nextDepth, path, graph);
         }
     };
 
-    return walkGraph(json, 0);
+    return walkGraph(json, 0, pathset, json);
 };
 
 module.exports = getter;

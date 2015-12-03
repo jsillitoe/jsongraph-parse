@@ -12,11 +12,13 @@
 
 var normalize = require('./normalize');
 var toArray = require('./toarray');
+var isRange = require('./isrange');
 
 var range = {
 
     'normalize': normalize,
-    'toArray': toArray
+    'toArray': toArray,
+    'isRange': isRange
 
 };
 
