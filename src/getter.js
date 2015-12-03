@@ -25,6 +25,10 @@ var getter = function(pathset, jsonGraph){
         }
 
         nextJson = currentJson[nextElement];
+        if (typeof nextJson=='object' && nextJson.hasOwnProperty('$type') && nextJson['$type']=='ref'){
+            nextJson = walkGraph(graph, 0, nextJson['value'], graph);
+        }
+
 
         if (nextDepth == path.length){
             return nextJson;

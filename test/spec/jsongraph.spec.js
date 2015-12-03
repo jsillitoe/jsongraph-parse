@@ -16,10 +16,24 @@ describe('jsonGraph ', function () {
         describe('passing a json graph object',function(){
 
             it ('should follow $ref objects', function(){
-                var jg = {a: {"$type": 'ref', "value": ['b']}, 'b': { 'c': 'value'}};
+                var jg = {'a': {"$type": 'ref', "value": ['b']}, 'b': { 'c': 'value'}};
                 var thevalue = JsonGraph.get(['a','c'], jg);
                 expect(thevalue).to.equal('value');
             });
+
+
+            it ('should follow multiple $ref objects', function(){
+                var jg = {
+                    'a': {"$type": 'ref', "value": ['b']},
+                    'b': {
+                        'c': {"$type": 'ref', "value": ['d']}
+                    },
+                    'd': 'value'
+                };
+                var thevalue = JsonGraph.get(['a','c'], jg);
+                expect(thevalue).to.equal('value');
+            });
+
 
         });
 
