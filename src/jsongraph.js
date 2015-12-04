@@ -10,8 +10,6 @@
 
 "use strict";
 
-
-
 var parse = require('./parse.js');
 var range = require('./range');
 var errors = require('./errors');
