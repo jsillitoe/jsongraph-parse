@@ -6,14 +6,14 @@
 
 describe('jsonGraph ', function () {
 
-    describe('get function', function(){
+    describe('parsing', function(){
 
 
         describe('passing a json graph object',function(){
 
             it ('should follow $ref objects', function(){
                 var jg = {'a': {"$type": 'ref', "value": ['b']}, 'b': { 'c': 'value'}};
-                var thevalue = JsonGraph.get(['a','c'], jg);
+                var thevalue = JsonGraph.parse(jg, ['a','c']);
                 expect(thevalue).to.equal('value');
             });
 
@@ -26,7 +26,7 @@ describe('jsonGraph ', function () {
                     },
                     'd': 'value'
                 };
-                var thevalue = JsonGraph.get(['a','c'], jg);
+                var thevalue = JsonGraph.parse(jg, ['a','c']);
                 expect(thevalue).to.equal('value');
             });
 
@@ -39,7 +39,7 @@ describe('jsonGraph ', function () {
                     },
                     'd': 'value'
                 };
-                var thevalue = JsonGraph.get(['a'], jg);
+                var thevalue = JsonGraph.parse(jg, ['a']);
                 expect(thevalue).to.equal('value');
             });
 
@@ -54,7 +54,7 @@ describe('jsonGraph ', function () {
                         },
                         'd': {"$type": 'ref', "value": ['b', 'c']}
                     };
-                    var value = JsonGraph.get(['a','c'], jg);
+                    var value = JsonGraph.parse(jg, ['a','c']);
                     console.log(JSON.stringify(value));
                 };
                 expect(runtest).to.throw(JsonGraph.errors.circularReferencesException);
@@ -70,19 +70,19 @@ describe('jsonGraph ', function () {
 
             it ('should return a value from a simple object', function(){
                 var json = {'a' : 'value'};
-                var thevalue = JsonGraph.get(['a'], json);
+                var thevalue = JsonGraph.parse(json, ['a']);
                 expect(thevalue).to.equal('value');
             });
 
             it ('should return a value from an object with depth', function(){
                 var json = {'a' : {'b': {'c': 'value'}}};
-                var thevalue = JsonGraph.get(['a','b','c'], json);
+                var thevalue = JsonGraph.parse(json, ['a','b','c']);
                 expect(thevalue).to.equal('value');
             });
 
             it ('should return a object from an object with depth', function(){
                 var json = {'a' : {'b': {'c': 'value'}}};
-                var theobject = JsonGraph.get(['a','b'], json);
+                var theobject = JsonGraph.parse(json, ['a','b']);
                 expect(theobject).to.deep.equal({'c': 'value'});
             });
 

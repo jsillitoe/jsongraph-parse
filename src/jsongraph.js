@@ -11,16 +11,16 @@
 "use strict";
 
 
-var getter = require('./getter.js');
+var getpaths = require('./getpaths.js');
+var parse = require('./parse.js');
 var range = require('./range');
 var errors = require('./errors');
 
 var jsonGraph = {
-    'get': getter,
+    'getPaths': getpaths,
     'range': range,
-    'errors': errors
-
-
+    'errors': errors,
+    'parse': parse
 };
 
 
