@@ -18,7 +18,7 @@ var getter = function(pathset, jsonGraph){
     var json = JSON.parse(JSON.stringify(jsonGraph));
     var referenceCount = 0;
 
-    var walkGraph = function(currentJson, currentDepth, path, graph){
+    var walkGraph = function(currentJson, path, currentDepth, graph){
         var nextDepth = currentDepth + 1;
         var nextElement = path[currentDepth];
 
@@ -28,24 +28,24 @@ var getter = function(pathset, jsonGraph){
 
         while (typeof currentJson=='object' && currentJson.hasOwnProperty('$type') && currentJson['$type']=='ref'){
             referenceCount = referenceCount + 1;
-            currentJson = walkGraph(graph, 0, currentJson['value'], graph);
+            currentJson = walkGraph(graph, currentJson['value'], 0, graph);
         }
 
         var nextJson = currentJson[nextElement];
 
         while (typeof nextJson=='object' && nextJson.hasOwnProperty('$type') && nextJson['$type']=='ref'){
             referenceCount = referenceCount + 1;
-            nextJson = walkGraph(graph, 0, nextJson['value'], graph);
+            nextJson = walkGraph(graph, nextJson['value'], 0, graph);
         }
 
         if (nextDepth == path.length){
             return nextJson;
         }else{
-            return walkGraph(nextJson, nextDepth, path, graph);
+            return walkGraph(nextJson, path, nextDepth, graph);
         }
     };
 
-    return walkGraph(json, 0, pathset, json);
+    return walkGraph(json, pathset, 0, json);
 };
 
 module.exports = getter;
