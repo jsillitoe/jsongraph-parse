@@ -22,10 +22,9 @@ var getter = function(pathset, jsonGraph){
     var walkGraph = function(currentJson, currentDepth, path, graph){
         var nextDepth = currentDepth + 1;
         var nextElement = path[currentDepth];
-        var nextJson;
 
         if (referenceCount > MAX_REFERENCES){
-            throw(new circularReferencesException("Max References Exceeded", pathset, json))
+            throw(new circularReferencesException("Max References Exceeded", path, graph))
         }
 
         while (typeof currentJson=='object' && currentJson.hasOwnProperty('$type') && currentJson['$type']=='ref'){
@@ -33,7 +32,7 @@ var getter = function(pathset, jsonGraph){
             currentJson = walkGraph(graph, 0, currentJson['value'], graph);
         }
 
-        nextJson = currentJson[nextElement];
+        var nextJson = currentJson[nextElement];
 
         while (typeof nextJson=='object' && nextJson.hasOwnProperty('$type') && nextJson['$type']=='ref'){
             referenceCount = referenceCount + 1;
