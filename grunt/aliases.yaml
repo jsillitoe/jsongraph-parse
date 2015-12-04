@@ -17,4 +17,6 @@ dist:
     - 'clean:dist'
     - 'build'
     - 'test'
+    - 'copy:dist'
+    - 'uglify'
 
