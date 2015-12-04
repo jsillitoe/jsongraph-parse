@@ -8,8 +8,43 @@ describe('jsonGraph ', function () {
 
     describe('parsing', function(){
 
-
         describe('passing a json graph object',function(){
+
+            it('should work on the example provided in the readme', function(){
+
+                var graph = {
+                    "user_preferencesById": {
+                        "1": {
+                            "user": {
+                                "value": ["usersById", "1"],
+                                "$type": "ref"
+                            },
+                            "key": "favorite_color",
+                            "user_id": 1,
+                            "value": "Black",
+                            "id": 1
+                        }
+                    },
+                    "usersById": {
+                        "1": {
+                            "id": 1,
+                            "firstname": "Jane",
+                            "lastname": "Smith",
+                            "preferences": [{
+                                "value": ["user_preferencesById", "1"],
+                                "$type": "ref"
+                            }]
+                        }
+                    },
+                    "user": {
+                        "value": ["usersById", "1"],
+                        "$type": "ref"
+                    }
+                };
+                var color = JsonGraph.parse(graph, ['user', 'preferences', 0, 'value']); // Black
+                expect(color).to.equal('Black');
+            });
+
 
             it ('should follow $ref objects', function(){
                 var jg = {'a': {"$type": 'ref', "value": ['b']}, 'b': { 'c': 'value'}};
@@ -60,10 +95,7 @@ describe('jsonGraph ', function () {
                 expect(runtest).to.throw(JsonGraph.errors.circularReferencesException);
             });
 
-
         });
-
-
 
 
         describe('passing a normal json object', function (){

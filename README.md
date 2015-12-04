@@ -27,7 +27,7 @@ var graph = {
             "preferences": [{
                 "value": ["user_preferencesById", "1"],
                 "$type": "ref"
-            }],
+            }]
         }
     },
     "user": {
