@@ -11,13 +11,12 @@
 "use strict";
 
 
-var getpaths = require('./getpaths.js');
+
 var parse = require('./parse.js');
 var range = require('./range');
 var errors = require('./errors');
 
 var jsonGraph = {
-    'getPaths': getpaths,
     'range': range,
     'errors': errors,
     'parse': parse
