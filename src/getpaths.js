@@ -12,8 +12,15 @@
 
 var parse = require('./parse.js');
 
-var getter = function(pathsets, jsonGraph){
 
+/**
+ * Accept an array of path sets to parse the graph with.
+ *
+ * @param pathsets - An array of path sets.
+ * @param jsonGraph - the graph object to parse.
+ * @returns {*}
+ */
+var getter = function(pathsets, jsonGraph){
 
 
 
