@@ -10,7 +10,6 @@
 
 "use strict";
 
-var toArray = require('./range/toarray');
 var circularReferencesException = require('./errors/circularreferences');
 
 var MAX_REFERENCES = 500;
