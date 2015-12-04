@@ -19,6 +19,9 @@ var getter = function(pathset, jsonGraph){
     var referenceCount = 0;
 
     var walkGraph = function(currentJson, path, currentDepth, graph){
+        currentDepth = typeof currentDepth === 'undefined' ? 0 : currentDepth;
+        graph = typeof graph === 'undefined' ? currentJson : graph;
+
         var nextDepth = currentDepth + 1;
         var nextElement = path[currentDepth];
 
@@ -45,7 +48,7 @@ var getter = function(pathset, jsonGraph){
         }
     };
 
-    return walkGraph(json, pathset, 0, json);
+    return walkGraph(json, pathset);
 };
 
 module.exports = getter;
