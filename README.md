@@ -4,7 +4,7 @@ JsonGraph Parse is a library for using path sets to extract values from a JSON G
 
 ## Example
 
-'''js
+```js
 
 var graph = {
     "user_preferencesById": {
@@ -39,4 +39,4 @@ var graph = {
 
 var color = JsonGraph.parse(graph, ['user', 'preferences', 0, 'value']); // Black
 
-'''
+```
