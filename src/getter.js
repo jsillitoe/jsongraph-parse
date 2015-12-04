@@ -11,24 +11,34 @@
 "use strict";
 
 var toArray = require('./range/toarray');
+var circularReferencesException = require('./errors/circularreferences');
+
+var MAX_REFERENCES = 500;
 
 var getter = function(pathset, jsonGraph){
     var json = JSON.parse(JSON.stringify(jsonGraph));
+    var referenceCount = 0;
 
     var walkGraph = function(currentJson, currentDepth, path, graph){
         var nextDepth = currentDepth + 1;
         var nextElement = path[currentDepth];
         var nextJson;
 
-        if (typeof currentJson=='object' && currentJson.hasOwnProperty('$type') && currentJson['$type']=='ref'){
+        if (referenceCount > MAX_REFERENCES){
+            throw(new circularReferencesException("Max References Exceeded", pathset, json))
+        }
+
+        while (typeof currentJson=='object' && currentJson.hasOwnProperty('$type') && currentJson['$type']=='ref'){
+            referenceCount = referenceCount + 1;
             currentJson = walkGraph(graph, 0, currentJson['value'], graph);
         }
 
         nextJson = currentJson[nextElement];
-        if (typeof nextJson=='object' && nextJson.hasOwnProperty('$type') && nextJson['$type']=='ref'){
+
+        while (typeof nextJson=='object' && nextJson.hasOwnProperty('$type') && nextJson['$type']=='ref'){
+            referenceCount = referenceCount + 1;
             nextJson = walkGraph(graph, 0, nextJson['value'], graph);
         }
-
 
         if (nextDepth == path.length){
             return nextJson;

@@ -13,10 +13,13 @@
 
 var getter = require('./getter.js');
 var range = require('./range');
+var errors = require('./errors');
 
 var jsonGraph = {
     'get': getter,
-    'range': range
+    'range': range,
+    'errors': errors
+
 
 };
 
