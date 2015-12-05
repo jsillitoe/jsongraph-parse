@@ -5,15 +5,19 @@
     "jrs1 <jsillitoe@gmail.com>"
   ],
   "description": "Parse through a json graph object using path sets to extract values.",
-  "main": "",
+  "main": "dist/jsongraph-parse.js",
   "moduleType": [
-    "es6"
+    "globals"
   ],
   "keywords": [
     "json",
     "jsonGraph",
     "parser"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/jsillitoe/jsongraph-parse.git"
+  },
   "license": "MIT",
   "ignore": [
     "**/.*",

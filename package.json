@@ -1,6 +1,6 @@
 {
   "name": "jsongraph-parse",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Parse through a json graph object using path sets to extract values.",
   "main": "index.js",
   "scripts": {
